@@ -50,6 +50,12 @@ body {
   color: #1e2a23;
 }
 
+.hero-lead {
+  margin-top: 18px;
+  max-width: 640px;
+  color: #2a3b31;
+}
+
 /* SECTIONS */
 .section {
   margin-bottom: 50px;
