@@ -30,7 +30,7 @@ body {
 }
 
 .logo {
-  width: 56px;
+  width: min(220px, 65vw);
   height: auto;
   opacity: 0.9;
 }
