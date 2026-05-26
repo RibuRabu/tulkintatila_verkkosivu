@@ -3,113 +3,965 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tulkintatila</title>
-  <meta
-    name="description"
-    content="Tulkintatila tekee ajattelun, työprosessit ja päätöslogiikan näkyväksi ja muuttaa ne tarvittaessa selkeiksi digitaalisiksi rakenteiksi."
-  >
-  <link rel="stylesheet" href="style.css">
+  <title>Tulkintatila | AI-konsultointi ja digitaaliset rakenteet</title>
+  <meta name="description" content="Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti — suunnittelemalla työnkulkuja, joissa päätöslogiikka pysyy näkyvänä. Konsultointi, kevyet digitaaliset rakenteet ja verkkosivut.">
+  <link rel="canonical" href="https://tulkintatila.fi/">
+  <meta property="og:locale" content="fi_FI">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tulkintatila | AI-konsultointi ja digitaaliset rakenteet">
+  <meta property="og:description" content="Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti. Konsultointi, työnkulut ja kevyet digitaaliset ratkaisut.">
+  <meta property="og:url" content="https://tulkintatila.fi/">
+  <meta property="og:site_name" content="Tulkintatila">
+  <meta property="og:image" content="https://tulkintatila.fi/images/logo.png">
+  <meta property="og:image:alt" content="Tulkintatilan logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tulkintatila | AI-konsultointi ja digitaaliset rakenteet">
+  <meta name="twitter:description" content="Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti.">
+  <meta name="twitter:image" content="https://tulkintatila.fi/images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+/* ============================================
+   TULKINTATILA — Measured Editorial
+   ============================================ */
+:root {
+  --bg:          #eef3ef;
+  --bg-alt:      #f2f7f3;
+  --bg-dark:     #1e2a23;
+  --text:        #1e2a23;
+  --text-mid:    #2a3b31;
+  --text-muted:  #6f8a78;
+  --accent:      #2f4739;
+  --accent-mid:  #4a6b57;
+  --border:      #cad9ce;
+  --border-mid:  #a8c0b0;
+  --card-bg:     #f0f6f1;
+  --card-ai:     #e6f2ea;
+  --highlight:   #b8d4c0;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --nav-h:     64px;
+  --container: 1120px;
+  --radius:    10px;
+  --radius-lg: 18px;
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 24px);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a   { color: inherit; text-decoration: none; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: rgba(238, 243, 239, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+}
+
+.nav-brand { display: flex; align-items: center; }
+.nav-logo  { height: 30px; width: auto; opacity: 0.88; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-mid);
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text); }
+
+.nav-cta {
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--accent);
+  color: #fff;
+  padding: 9px 20px;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.18s var(--ease), box-shadow 0.2s;
+}
+.nav-cta:hover {
+  background: var(--bg-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(30,42,35,0.22);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  width: 32px;
+  height: 32px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
+/* HERO */
+.hero {
+  min-height: calc(100vh - var(--nav-h));
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 64px;
+  align-items: center;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 80px 36px 100px;
+  animation: fadeUp 0.7s var(--ease) both;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 30px;
+  animation: fadeUp 0.65s 0.08s var(--ease) both;
+}
+.hero-h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
+
+.hero-body {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--text-mid);
+  max-width: 500px;
+  margin-bottom: 38px;
+  animation: fadeUp 0.65s 0.16s var(--ease) both;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.65s 0.24s var(--ease) both;
+}
+
+.hero-flow { animation: fadeUp 0.8s 0.32s var(--ease) both; }
+
+.flow-label-top {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.flow-track {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  overflow: hidden;
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.flow-step:last-child { border-bottom: none; }
+.flow-step:hover { background: rgba(47,71,57,0.05); }
+
+.flow-n {
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  min-width: 22px;
+}
+
+.flow-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-mid);
+}
+
+.flow-caption {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-top: 14px;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 26px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+}
+.btn--primary { background: var(--accent); color: #fff; }
+.btn--primary:hover {
+  background: var(--bg-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(30,42,35,0.24);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--text-mid);
+  border: 1px solid var(--border-mid);
+}
+.btn--ghost:hover {
+  background: var(--card-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn--sm  { font-size: 13px; padding: 9px 20px; }
+.btn--lg  { font-size: 17px; padding: 16px 40px; }
+.btn--lab {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.22);
+}
+.btn--lab:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* SECTIONS */
+.section { padding: 96px 0; }
+.section--ink   { background: var(--bg-dark); color: #fff; }
+.section--about { background: var(--bg-alt); }
+
+.section-intro { max-width: 620px; margin-bottom: 52px; }
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.section-label--light { color: rgba(255,255,255,0.4); }
+
+.section-n {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1.18;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.section-h2--light { color: rgba(255,255,255,0.9); }
+
+.section-desc { font-size: 16px; font-weight: 300; color: var(--text-mid); line-height: 1.7; }
+.section-desc--light { color: rgba(255,255,255,0.5); }
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px 34px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.22s;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--accent);
+  transition: height 0.35s var(--ease);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 44px rgba(30,42,35,0.10);
+  border-color: var(--border-mid);
+}
+.card:hover::before { height: 100%; }
+
+.card--featured { background: var(--card-ai); border-color: #b0cbb8; }
+.card--featured::before { background: var(--accent-mid); }
+
+.card-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.card-h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.22;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.card-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--text-mid);
+}
+
+/* PROCESS STEPS */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.step {
+  padding: 32px 24px 36px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.2s;
+}
+.step:last-child { border-right: none; }
+.step:hover { background: rgba(255,255,255,0.03); }
+
+.step-n {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.07);
+  line-height: 1;
+  margin-bottom: 20px;
+  user-select: none;
+}
+.step-h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 10px;
+}
+.step p {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.65;
+}
+
+/* WHEN GRID */
+.when-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.when-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px 32px;
+  background: var(--bg);
+  transition: background 0.2s;
+}
+.when-item:hover { background: var(--card-bg); }
+.when-marker { color: var(--accent-mid); font-size: 7px; margin-top: 7px; flex-shrink: 0; }
+.when-item p { font-size: 15px; font-weight: 300; color: var(--text-mid); line-height: 1.62; }
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-p {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.about-text .btn { margin-top: 8px; }
+
+.about-quote {
+  border-left: 3px solid var(--accent-mid);
+  padding-left: 32px;
+}
+.about-quote p {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.2vw, 27px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+.about-quote cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+
+/* LAB */
+.lab-section { padding: 0 0 80px; }
+.lab-card {
+  background: var(--bg-dark);
+  border-radius: 24px;
+  padding: 64px 72px;
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.lab-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(74,107,87,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.lab-content { position: relative; z-index: 1; }
+.lab-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--highlight);
+  margin-bottom: 16px;
+}
+.lab-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.lab-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.72;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+.lab-deco {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.lab-deco-inner {
+  width: 160px; height: 160px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* CTA */
+.cta-section { padding: 120px 0 140px; text-align: center; }
+.cta-inner { max-width: 520px; margin: 0 auto; }
+.cta-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 70px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 22px;
+}
+.cta-body {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.72;
+  margin-bottom: 36px;
+}
+
+/* FOOTER */
+.footer { border-top: 1px solid var(--border); padding: 28px 0; }
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.footer-brand { display: flex; align-items: center; }
+.footer-logo  { height: 22px; width: auto; opacity: 0.65; }
+.footer-nav   { display: flex; align-items: center; gap: 24px; }
+.footer-nav a { font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
+.footer-nav a:hover { color: var(--text); }
+.footer-copy  { font-size: 12px; color: var(--text-muted); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 64px 36px 80px;
+    gap: 48px;
+  }
+  .hero-flow { max-width: 480px; }
+  .flow-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .flow-step {
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px;
+    text-align: center;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+  }
+  .flow-step:last-child { border-right: none; }
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .step:nth-child(3) { border-right: none; }
+  .step:nth-child(4),
+  .step:nth-child(5) { border-top: 1px solid rgba(255,255,255,0.07); }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .lab-card { grid-template-columns: 1fr; padding: 52px 48px; }
+  .lab-deco { display: none; }
+  .when-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+/* MOBILE */
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .nav { padding: 0 20px; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 20px 16px;
+    box-shadow: 0 8px 24px rgba(30,42,35,0.08);
+  }
+  .nav-links.is-open { display: flex; }
+  .nav-link { padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .nav-cta  { margin-top: 12px; text-align: center; border-radius: 8px; padding: 13px; }
+  .nav-toggle { display: flex; }
+  .hero { padding: 48px 20px 64px; gap: 40px; }
+  .hero-flow { display: none; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .section { padding: 72px 0; }
+  .card-grid { grid-template-columns: 1fr; }
+  .steps {
+    grid-template-columns: 1fr;
+    border: none;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .step {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 24px 24px 28px;
+    background: rgba(255,255,255,0.02);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-n { font-size: 36px; margin-bottom: 14px; }
+  .when-item { padding: 22px 20px; }
+  .lab-card { padding: 36px 28px; }
+  .cta-section { padding: 80px 0 100px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-nav { flex-wrap: wrap; gap: 16px; }
+}
+  </style>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Tulkintatila",
+      "url": "https://tulkintatila.fi/",
+      "email": "hello@tulkintatila.fi",
+      "description": "Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti — konsultointi, työnkulut ja kevyet digitaaliset ratkaisut.",
+      "image": "https://tulkintatila.fi/images/logo.png",
+      "areaServed": {"@type": "Country", "name": "Finland"},
+      "knowsAbout": ["AI-konsultointi", "digitaaliset työnkulut", "verkkosivut", "kevyet digitaaliset järjestelmät"],
+      "sameAs": ["https://lab.tulkintatila.fi/"]
+    }
+  </script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wnurjt6llh");
   </script>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="hero">
-      <div class="logo-wrap">
-        <img src="images/logo.png" alt="Tulkintatila logo" class="logo">
-      </div>
 
-      <div class="hero-copy">
-        <p class="eyebrow">Tulkintatila</p>
-        <h1>Kohta, jossa havainto, tulkinta, työprosessi ja digitaalinen rakenne kohtaavat.</h1>
-        <p class="hero-lead">
-          Tulkintatila tekee ajattelun, työprosessit ja päätöslogiikan näkyväksi
-          ja muuttaa ne tarvittaessa selkeiksi digitaalisiksi rakenteiksi.
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <img src="images/logo.png" alt="Tulkintatila" class="nav-logo">
+    </a>
+    <button class="nav-toggle" aria-label="Valikko" aria-expanded="false"
+      onclick="var e=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',e?'false':'true');document.querySelector('.nav-links').classList.toggle('is-open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="#palvelut" class="nav-link">Palvelut</a>
+      <a href="#prosessi" class="nav-link">Prosessi</a>
+      <a href="#minusta" class="nav-link">Tulkintatila</a>
+      <a href="https://lab.tulkintatila.fi/" class="nav-link" target="_blank" rel="noopener">Lab ↗</a>
+      <a href="mailto:hello@tulkintatila.fi" class="nav-cta">Ota yhteyttä</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">AI-konsultointi · Digitaaliset rakenteet · Työnkulut</p>
+        <h1 class="hero-h1">
+          Tehdään ajattelu,<br>
+          <em>havainto ja<br>päätöslogiikka</em><br>
+          näkyväksi.
+        </h1>
+        <p class="hero-body">
+          Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti —
+          ei valmiiden mallien mukaan, vaan sen mukaan miten työ
+          todellisuudessa tapahtuu.
         </p>
-        <p class="hero-lead">
-          Työ voi tarkoittaa verkkosivua, kevyttä järjestelmää, ajanvarauksen tai
-          prosessin työkalua, AI-avusteista työnkulkua tai tapaa dokumentoida ja
-          tehdä havaintoja näkyviksi ilman ylimääräistä järjestelmäkerrosta.
-        </p>
-      </div>
-    </header>
-
-    <main class="content">
-      <section class="section">
-        <h2>Mitä teen</h2>
-        <p>Rakennan käytännön ratkaisuja silloin, kun valmiit mallit eivät riitä tai kun työn logiikka pitää tehdä näkyväksi ennen toteutusta.</p>
-        <ul>
-          <li>verkkosivuja, joiden tehtävä ei ole vain esitellä vaan kantaa ajattelua</li>
-          <li>kevyitä räätälöityjä digitaalisia järjestelmiä tiettyyn käytännön tarpeeseen</li>
-          <li>ajanvaraus- ja prosessityökaluja</li>
-          <li>AI-avusteisia työnkulkuja</li>
-          <li>myynnin ja käytännön prosessin tukityökaluja</li>
-          <li>havainnoinnin ja dokumentoinnin välineitä</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Miten työ etenee</h2>
-        <p>Työ alkaa siitä, mitä todella tapahtuu, ei siitä miltä prosessin oletetaan näyttävän.</p>
-        <ul>
-          <li><strong>havainto:</strong> erotetaan, mitä voidaan nähdä, lukea tai todentaa suoraan</li>
-          <li><strong>tulkinta:</strong> tehdään näkyväksi, mitä havainnosta päätellään ja mitä oletetaan</li>
-          <li><strong>rakenne:</strong> jäsennetään työnkulku, päätöspisteet, vastuut ja tiedon liike</li>
-          <li><strong>toteutus:</strong> rakennetaan tarkoitukseen sopiva verkkosivu, työkalu tai kevyt järjestelmä</li>
-          <li><strong>dokumentointi:</strong> kuvataan, miten ratkaisu toimii, mitä se näyttää näkyväksi ja miten sitä käytetään</li>
-        </ul>
-        <p>Tulkintatilassa havainto, tulkinta ja päätelmä eivät jää taustalle. Ne tehdään näkyviksi, jotta työ voidaan toteuttaa tarkasti.</p>
-      </section>
-
-      <section class="section">
-        <h2>Milloin tästä on hyötyä</h2>
-        <p>Tulkintatila on hyödyllinen erityisesti silloin, kun ongelma ei ole vain tekninen vaan rakenteellinen.</p>
-        <ul>
-          <li>valmiit työkalut eivät sovi siihen, miten työ todellisuudessa tapahtuu</li>
-          <li>prosessi on epäselvä, pirstaleinen tai vaikeasti kuvattava</li>
-          <li>verkkosivun pitää kantaa ajattelua, rakennetta ja toimintalogiikkaa, ei vain sisältöä</li>
-          <li>pieni räätälöity järjestelmä on tarkoituksenmukaisempi kuin suuri valmis alusta</li>
-          <li>päätöksenteko perustuu hiljaiseen tietoon, jota pitää saada näkyväksi</li>
-          <li>havainto, dokumentointi ja käytännön työ pitäisi saada samaan rakenteeseen</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Rakenteita käytännön työhön</h2>
-        <p>Digitaalinen rakenne voi olla pieni ja tarkkarajainen. Sen tehtävä ei ole lisätä järjestelmää järjestelmän päälle, vaan tehdä työstä luettavampaa, seurattavampaa ja käytännössä toimivaa.</p>
-
-        <div class="example-card">
-          <p><strong>NFC-rakenteet:</strong> fyysiseen kohteeseen liitetty luettava tieto, tunniste tai käyttötilanne, joka tuo havaintoa, historiaa tai vastuuta näkyviin suoraan oikeassa kohdassa.</p>
-          <p><strong>Kevyet järjestelmät:</strong> rajattu digitaalinen rakenne tiettyyn tarpeeseen silloin, kun suuri valmis alusta olisi työn kokoon nähden raskas.</p>
-          <p><strong>Ajanvaraus ja palvelupolut:</strong> rakenne, jossa varaus, eteneminen, palvelun vaiheet ja tarvittava tieto pysyvät samassa käytännön ketjussa.</p>
-          <p><strong>AI-avusteiset työnkulut:</strong> työn vaiheita tukeva rakenne, jossa havaintoja, tekstiä, luokittelua tai dokumentointia voidaan käsitellä avusteisesti ilman että päätöslogiikka jää epäselväksi.</p>
+        <div class="hero-actions">
+          <a href="mailto:hello@tulkintatila.fi" class="btn btn--primary">Ota yhteyttä</a>
+          <a href="#palvelut" class="btn btn--ghost">Katso palvelut</a>
         </div>
+      </div>
+      <div class="hero-flow">
+        <p class="flow-label-top">Työskentelytapa</p>
+        <div class="flow-track">
+          <div class="flow-step">
+            <span class="flow-n">01</span>
+            <span class="flow-name">Havainto</span>
+          </div>
+          <div class="flow-step">
+            <span class="flow-n">02</span>
+            <span class="flow-name">Tulkinta</span>
+          </div>
+          <div class="flow-step">
+            <span class="flow-n">03</span>
+            <span class="flow-name">Rakenne</span>
+          </div>
+          <div class="flow-step">
+            <span class="flow-n">04</span>
+            <span class="flow-name">Toteutus</span>
+          </div>
+        </div>
+        <p class="flow-caption">Havainto ja tulkinta eivät jää taustalle —<br>ne tehdään näkyviksi ennen toteutusta.</p>
+      </div>
+    </section>
 
-        <p>Näitä ei rakenneta valmiin palvelulistan mukaan, vaan sen mukaan missä kohtaa havainto, tulkinta, päätös ja toiminta pitää saada samaan rakenteeseen.</p>
-      </section>
+    <!-- PALVELUT -->
+    <section class="section" id="palvelut">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">01</span>
+            <span>Palvelut</span>
+          </div>
+          <h2 class="section-h2">Käytännön ratkaisuja, kun valmiit mallit eivät riitä</h2>
+          <p class="section-desc">Rakennan ratkaisuja silloin, kun työn logiikka pitää tehdä näkyväksi ennen toteutusta.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card card--featured">
+            <div class="card-tag">AI-konsultointi</div>
+            <h3 class="card-h3">AI-avusteiset työnkulut</h3>
+            <p class="card-body">Suunnittelen työnkulkuja, joissa AI:ta käytetään tarkoituksenmukaisesti — havaintojen käsittely, luokittelu, dokumentointi ja päätöslogiikka pysyvät selkeänä rakenteena.</p>
+          </article>
+          <article class="card">
+            <div class="card-tag">Verkkosivut</div>
+            <h3 class="card-h3">Verkkosivut</h3>
+            <p class="card-body">Sivuja, joiden tehtävä on kantaa ajattelua, rakennetta ja toimintalogiikkaa — ei vain esitellä.</p>
+          </article>
+          <article class="card">
+            <div class="card-tag">Järjestelmät</div>
+            <h3 class="card-h3">Kevyet digitaaliset järjestelmät</h3>
+            <p class="card-body">Rajattuja digitaalisia rakenteita tiettyyn käytännön tarpeeseen, kun suuri valmis alusta olisi työn kokoon nähden raskas.</p>
+          </article>
+          <article class="card">
+            <div class="card-tag">Prosessit</div>
+            <h3 class="card-h3">Ajanvaraus ja palvelupolut</h3>
+            <p class="card-body">Rakenne, jossa varaus, eteneminen ja palvelun vaiheet pysyvät samassa käytännön ketjussa.</p>
+          </article>
+          <article class="card">
+            <div class="card-tag">NFC</div>
+            <h3 class="card-h3">NFC-rakenteet</h3>
+            <p class="card-body">Fyysiseen kohteeseen liitetty luettava tieto, joka tuo havaintoa, historiaa tai vastuuta näkyviin suoraan oikeassa kohdassa.</p>
+          </article>
+          <article class="card card--consult">
+            <div class="card-tag">Konsultointi</div>
+            <h3 class="card-h3">Rakenteellinen analyysi</h3>
+            <p class="card-body">Kun ongelma ei ole tekninen vaan rakenteellinen: erotetaan havainto, tulkinta ja päätelmä — ja katsotaan miten niistä muodostuu toimiva prosessi.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2>Mitä Tulkintatila tässä tarkoittaa</h2>
-        <p>Tulkintatila ei tarkoita pelkkää toteutusta eikä pelkkää analyysiä.</p>
-        <p>Se tarkoittaa työskentelytapaa, jossa erotetaan toisistaan havainto, tulkinta ja päätelmä, ja katsotaan miten niistä muodostuu käytännön työprosessi.</p>
-        <p>Kun rakenne tulee näkyviin, se voidaan tarvittaessa muuttaa selkeäksi digitaaliseksi muodoksi.</p>
-      </section>
+    <!-- PROSESSI -->
+    <section class="section section--ink" id="prosessi">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label section-label--light">
+            <span class="section-n">02</span>
+            <span>Prosessi</span>
+          </div>
+          <h2 class="section-h2 section-h2--light">Miten työ etenee</h2>
+          <p class="section-desc section-desc--light">Työ alkaa siitä, mitä todella tapahtuu — ei siitä, miltä prosessin oletetaan näyttävän.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">1</span>
+            <div class="step-body">
+              <h3 class="step-h3">Havainto</h3>
+              <p>Erotetaan, mitä voidaan nähdä, lukea tai todentaa suoraan.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">2</span>
+            <div class="step-body">
+              <h3 class="step-h3">Tulkinta</h3>
+              <p>Tehdään näkyväksi, mitä havainnosta päätellään ja mitä oletetaan.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">3</span>
+            <div class="step-body">
+              <h3 class="step-h3">Rakenne</h3>
+              <p>Jäsennetään työnkulku, päätöspisteet, vastuut ja tiedon liike.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">4</span>
+            <div class="step-body">
+              <h3 class="step-h3">Toteutus</h3>
+              <p>Rakennetaan tarkoitukseen sopiva ratkaisu — verkkosivu, työkalu tai kevyt järjestelmä.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">5</span>
+            <div class="step-body">
+              <h3 class="step-h3">Dokumentointi</h3>
+              <p>Kuvataan, miten ratkaisu toimii, mitä se tekee näkyväksi ja miten sitä käytetään.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2>Tulkintatila Lab</h2>
-        <p>Labissa näkyy käytännön taso: rakennettuja esimerkkejä, tapauksia ja kokeiluja siitä, miten havainto, rakenne ja päätöslogiikka muuttuvat toimiviksi digitaalisiksi ratkaisuiksi.</p>
-        <p><a href="https://lab.tulkintatila.fi/">Siirry labiin</a></p>
-      </section>
-    </main>
+    <!-- MILLOIN -->
+    <section class="section" id="milloin">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">03</span>
+            <span>Milloin</span>
+          </div>
+          <h2 class="section-h2">Milloin tästä on hyötyä</h2>
+          <p class="section-desc">Erityisesti silloin, kun ongelma ei ole vain tekninen vaan rakenteellinen.</p>
+        </div>
+        <div class="when-grid">
+          <div class="when-item">
+            <span class="when-marker" aria-hidden="true">◆</span>
+            <p>Valmiit työkalut eivät sovi siihen, miten työ todellisuudessa tapahtuu</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker" aria-hidden="true">◆</span>
+            <p>AI:n käyttöönotto tuntuu hankalalta ilman selkeää rakennetta tai työnkulkua</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker" aria-hidden="true">◆</span>
+            <p>Prosessi on epäselvä, pirstaleinen tai vaikeasti kuvattava</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker" aria-hidden="true">◆</span>
+            <p>Päätöksenteko perustuu hiljaiseen tietoon, joka pitää saada näkyväksi</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker" aria-hidden="true">◆</span>
+            <p>Pieni räätälöity järjestelmä on tarkoituksenmukaisempi kuin suuri valmis alusta</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker" aria-hidden="true">◆</span>
+            <p>Havainto, dokumentointi ja käytännön työ pitäisi saada samaan rakenteeseen</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <footer class="footer">
-      <p><a href="mailto:hello@tulkintatila.fi">hello@tulkintatila.fi</a></p>
-    </footer>
-  </div>
+    <!-- TULKINTATILA -->
+    <section class="section section--about" id="minusta">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <div class="section-label">
+              <span class="section-n">04</span>
+              <span>Tulkintatila</span>
+            </div>
+            <h2 class="section-h2">Kohta, jossa havainto ja rakenne kohtaavat</h2>
+            <p class="about-p">Tulkintatila on työskentelytapa, jossa erotetaan toisistaan havainto, tulkinta ja päätelmä — ja katsotaan miten niistä muodostuu käytännön työprosessi.</p>
+            <p class="about-p">Erityisosaaminen: AI-avusteiset työnkulut, rakenteellinen analyysi, digitaaliset ratkaisut käytännön työn tueksi.</p>
+            <a href="mailto:hello@tulkintatila.fi" class="btn btn--primary btn--sm">hello@tulkintatila.fi</a>
+          </div>
+          <blockquote class="about-quote">
+            <p>"Havainto, tulkinta ja päätelmä eivät jää taustalle. Ne tehdään näkyviksi, jotta työ voidaan toteuttaa tarkasti."</p>
+            <cite>— Tulkintatila</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB -->
+    <section class="lab-section" id="lab">
+      <div class="container">
+        <div class="lab-card">
+          <div class="lab-content">
+            <span class="lab-eyebrow">Tulkintatila Lab</span>
+            <h2 class="lab-h2">Käytännön esimerkkejä ja kokeiluja</h2>
+            <p class="lab-body">Labissa näkyy käytännön taso: rakennettuja esimerkkejä, tapauksia ja kokeiluja siitä, miten havainto, rakenne ja päätöslogiikka muuttuvat toimiviksi digitaalisiksi ratkaisuiksi.</p>
+            <a href="https://lab.tulkintatila.fi/" class="btn btn--lab" target="_blank" rel="noopener">Siirry labiin →</a>
+          </div>
+          <div class="lab-deco" aria-hidden="true">
+            <div class="lab-deco-inner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="yhteys">
+      <div class="container">
+        <div class="cta-inner">
+          <h2 class="cta-h2">Aloitetaan?</h2>
+          <p class="cta-body">Kerro tilanteestasi. Katsotaan yhdessä, missä kohdin havainto, tulkinta ja rakenne pitää tehdä näkyviksi.</p>
+          <a href="mailto:hello@tulkintatila.fi" class="btn btn--primary btn--lg">Ota yhteyttä</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="/" class="footer-brand">
+        <img src="images/logo.png" alt="Tulkintatila" class="footer-logo">
+      </a>
+      <nav class="footer-nav" aria-label="Alatunnisteen navigaatio">
+        <a href="#palvelut">Palvelut</a>
+        <a href="#prosessi">Prosessi</a>
+        <a href="https://lab.tulkintatila.fi/" target="_blank" rel="noopener">Lab</a>
+        <a href="mailto:hello@tulkintatila.fi">hello@tulkintatila.fi</a>
+      </nav>
+      <p class="footer-copy">© 2025 Tulkintatila</p>
+    </div>
+  </footer>
+
 </body>
 </html>
