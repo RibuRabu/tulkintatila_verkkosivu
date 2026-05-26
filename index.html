@@ -18,10 +18,19 @@
   <meta name="twitter:title" content="Tulkintatila | AI-konsultointi ja digitaaliset rakenteet">
   <meta name="twitter:description" content="Tulkintatila tekee rakenteen näkyväksi.">
   <meta name="twitter:image" content="https://tulkintatila.fi/images/logo.png">
+  <meta name="author" content="Tulkintatila">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2f4739">
+  <meta name="geo.region" content="FI-18">
+  <meta name="geo.placename" content="Helsinki, Suomi">
+  <meta name="geo.position" content="60.1699;24.9384">
+  <meta name="ICBM" content="60.1699, 24.9384">
 
+  <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
   <style>
 /* ============================================
@@ -42,8 +51,8 @@
   --card-ai:     #e6f2ea;
   --highlight:   #b8d4c0;
   --tag-bg:      #ddeee3;
-  --font-display: 'Newsreader', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Satoshi', 'PP Neue Montreal', system-ui, -apple-system, sans-serif;
+  --font-body:    'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --nav-h:     64px;
   --container: 1120px;
   --radius:    10px;
@@ -903,18 +912,68 @@ a   { color: inherit; text-decoration: none; }
   </style>
 
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Tulkintatila",
-      "url": "https://tulkintatila.fi/",
-      "email": "hello@tulkintatila.fi",
-      "description": "Tulkintatila tekee rakenteen näkyväksi — konsultointi, AI-työnkulut ja kevyet digitaaliset järjestelmät. Yksi ihminen, suora yhteys rakentajaan.",
-      "image": "https://tulkintatila.fi/images/logo.png",
-      "areaServed": {"@type": "Country", "name": "Finland"},
-      "knowsAbout": ["AI-konsultointi", "digitaaliset työnkulut", "verkkosivut", "kevyet digitaaliset järjestelmät"],
-      "sameAs": ["https://lab.tulkintatila.fi/"]
-    }
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://tulkintatila.fi/#business",
+        "name": "Tulkintatila",
+        "url": "https://tulkintatila.fi/",
+        "email": "hello@tulkintatila.fi",
+        "description": "Tulkintatila tekee rakenteen näkyväksi — AI-konsultointi, työnkulut ja kevyet digitaaliset järjestelmät. Yksi ihminen, suora yhteys rakentajaan.",
+        "image": "https://tulkintatila.fi/images/logo.png",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "areaServed": {"@type": "Country", "name": "Finland"},
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "FI",
+          "addressRegion": "Uusimaa"
+        },
+        "knowsAbout": [
+          "AI-konsultointi",
+          "tekoälyarkkitehtuuri",
+          "digitaaliset työnkulut",
+          "verkkosivut",
+          "kevyet digitaaliset järjestelmät",
+          "compliance-työkalut",
+          "NFC-teknologia"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Tulkintatilan palvelut",
+          "itemListElement": [
+            {"@type": "Offer", "name": "Rakenteen tulkinta", "price": "290", "priceCurrency": "EUR"},
+            {"@type": "Offer", "name": "Fyysis-digitaalinen identiteetti", "price": "790", "priceCurrency": "EUR"},
+            {"@type": "Offer", "name": "Toimintajärjestelmät", "price": "1490", "priceCurrency": "EUR"},
+            {"@type": "Offer", "name": "Jatkuva tulkintatila", "description": "sopimuksen mukaan"}
+          ]
+        },
+        "sameAs": [
+          "https://lab.tulkintatila.fi/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://tulkintatila.fi/#website",
+        "url": "https://tulkintatila.fi/",
+        "name": "Tulkintatila",
+        "inLanguage": "fi",
+        "publisher": {"@id": "https://tulkintatila.fi/#business"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://tulkintatila.fi/#webpage",
+        "url": "https://tulkintatila.fi/",
+        "name": "Tulkintatila | AI-konsultointi ja digitaaliset rakenteet",
+        "description": "Tulkintatila tekee rakenteen näkyväksi — konsultointi, AI-työnkulut ja digitaaliset järjestelmät. Yksi ihminen, suora yhteys rakentajaan.",
+        "inLanguage": "fi",
+        "isPartOf": {"@id": "https://tulkintatila.fi/#website"},
+        "about": {"@id": "https://tulkintatila.fi/#business"}
+      }
+    ]
+  }
   </script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
