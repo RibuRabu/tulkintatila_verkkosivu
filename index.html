@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tulkintatila | AI-konsultointi ja digitaaliset rakenteet</title>
-  <meta name="description" content="Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti — suunnittelemalla työnkulkuja, joissa päätöslogiikka pysyy näkyvänä. Konsultointi, kevyet digitaaliset rakenteet ja verkkosivut.">
+  <meta name="description" content="Tulkintatila tekee rakenteen näkyväksi — konsultointi, AI-työnkulut ja digitaaliset järjestelmät. Yksi ihminen, suora yhteys rakentajaan.">
   <link rel="canonical" href="https://tulkintatila.fi/">
   <meta property="og:locale" content="fi_FI">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Tulkintatila | AI-konsultointi ja digitaaliset rakenteet">
-  <meta property="og:description" content="Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti. Konsultointi, työnkulut ja kevyet digitaaliset ratkaisut.">
+  <meta property="og:description" content="Tulkintatila tekee rakenteen näkyväksi. Konsultointi, AI-työnkulut ja kevyet digitaaliset ratkaisut.">
   <meta property="og:url" content="https://tulkintatila.fi/">
   <meta property="og:site_name" content="Tulkintatila">
   <meta property="og:image" content="https://tulkintatila.fi/images/logo.png">
   <meta property="og:image:alt" content="Tulkintatilan logo">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tulkintatila | AI-konsultointi ja digitaaliset rakenteet">
-  <meta name="twitter:description" content="Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti.">
+  <meta name="twitter:description" content="Tulkintatila tekee rakenteen näkyväksi.">
   <meta name="twitter:image" content="https://tulkintatila.fi/images/logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,6 +41,7 @@
   --card-bg:     #f0f6f1;
   --card-ai:     #e6f2ea;
   --highlight:   #b8d4c0;
+  --tag-bg:      #ddeee3;
   --font-display: 'Newsreader', Georgia, serif;
   --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
   --nav-h:     64px;
@@ -242,6 +243,13 @@ a   { color: inherit; text-decoration: none; }
   color: var(--text-mid);
 }
 
+.flow-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
 .flow-caption {
   font-size: 12px;
   font-weight: 300;
@@ -296,6 +304,7 @@ a   { color: inherit; text-decoration: none; }
 /* SECTIONS */
 .section { padding: 96px 0; }
 .section--ink   { background: var(--bg-dark); color: #fff; }
+.section--alt   { background: var(--bg-alt); }
 .section--about { background: var(--bg-alt); }
 
 .section-intro { max-width: 620px; margin-bottom: 52px; }
@@ -339,6 +348,9 @@ a   { color: inherit; text-decoration: none; }
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
+.card-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
 
 .card {
   background: var(--card-bg);
@@ -377,17 +389,108 @@ a   { color: inherit; text-decoration: none; }
 }
 .card-h3 {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
-  line-height: 1.22;
+  line-height: 1.2;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+}
+.card-price {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.card-price .price-unit {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-left: 2px;
 }
 .card-body {
   font-size: 14px;
   font-weight: 300;
   line-height: 1.72;
   color: var(--text-mid);
+}
+.card-detail {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  line-height: 1.55;
+}
+
+/* AUDIENCE */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.audience-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.22s;
+}
+.audience-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent-mid), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.audience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(30,42,35,0.09);
+  border-color: var(--border-mid);
+}
+.audience-card:hover::before { opacity: 1; }
+.audience-tag-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.audience-h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.audience-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+}
+.audience-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.audience-pill {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-mid);
+  background: var(--tag-bg);
+  padding: 3px 10px;
+  border-radius: 100px;
 }
 
 /* PROCESS STEPS */
@@ -429,6 +532,105 @@ a   { color: inherit; text-decoration: none; }
   color: rgba(255,255,255,0.48);
   line-height: 1.65;
 }
+
+/* FIKSIRIBU / CASE STUDY */
+.case-study-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.case-study-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: 40px 44px 36px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.case-study-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent-mid);
+  background: var(--tag-bg);
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+.case-study-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.case-study-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.72;
+}
+.case-study-quote {
+  border-left: 3px solid var(--accent-mid);
+  padding-left: 24px;
+}
+.case-study-quote p {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2vw, 24px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-mid);
+}
+.arch-table {
+  width: 100%;
+}
+.arch-head {
+  display: grid;
+  grid-template-columns: 60px 200px 130px 1fr;
+  background: rgba(47,71,57,0.04);
+  border-bottom: 1px solid var(--border);
+}
+.arch-head-cell {
+  padding: 12px 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border);
+}
+.arch-head-cell:last-child { border-right: none; }
+.arch-row {
+  display: grid;
+  grid-template-columns: 60px 200px 130px 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.arch-row:last-child { border-bottom: none; }
+.arch-row:hover { background: rgba(47,71,57,0.03); }
+.arch-cell {
+  padding: 20px 20px;
+  border-right: 1px solid var(--border);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.arch-cell:last-child { border-right: none; }
+.arch-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(47,71,57,0.18);
+  justify-content: center;
+}
+.arch-name-col { font-weight: 500; color: var(--text); }
+.arch-tool-col { color: var(--accent-mid); font-weight: 400; }
+.arch-desc-col { color: var(--text-mid); font-weight: 300; line-height: 1.6; }
 
 /* WHEN GRID */
 .when-grid {
@@ -612,7 +814,10 @@ a   { color: inherit; text-decoration: none; }
     border-right: 1px solid var(--border);
   }
   .flow-step:last-child { border-right: none; }
+  .flow-sub { display: none; }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .audience-grid { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(3, 1fr); }
   .step:nth-child(3) { border-right: none; }
   .step:nth-child(4),
@@ -621,6 +826,9 @@ a   { color: inherit; text-decoration: none; }
   .lab-card { grid-template-columns: 1fr; padding: 52px 48px; }
   .lab-deco { display: none; }
   .when-grid { grid-template-columns: 1fr; }
+  .case-study-top { grid-template-columns: 1fr; gap: 32px; padding: 32px 32px 28px; }
+  .arch-head { grid-template-columns: 48px 160px 110px 1fr; }
+  .arch-row  { grid-template-columns: 48px 160px 110px 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
 }
 
@@ -650,6 +858,8 @@ a   { color: inherit; text-decoration: none; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .section { padding: 72px 0; }
   .card-grid { grid-template-columns: 1fr; }
+  .card-grid--2 { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr; }
   .steps {
     grid-template-columns: 1fr;
     border: none;
@@ -670,6 +880,13 @@ a   { color: inherit; text-decoration: none; }
   .cta-section { padding: 80px 0 100px; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
   .footer-nav { flex-wrap: wrap; gap: 16px; }
+  .case-study-top { padding: 24px 20px 20px; }
+  .arch-head,
+  .arch-row {
+    grid-template-columns: 40px 1fr 1fr;
+  }
+  .arch-head-cell:nth-child(3),
+  .arch-cell:nth-child(3) { display: none; }
 }
   </style>
 
@@ -680,7 +897,7 @@ a   { color: inherit; text-decoration: none; }
       "name": "Tulkintatila",
       "url": "https://tulkintatila.fi/",
       "email": "hello@tulkintatila.fi",
-      "description": "Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti — konsultointi, työnkulut ja kevyet digitaaliset ratkaisut.",
+      "description": "Tulkintatila tekee rakenteen näkyväksi — konsultointi, AI-työnkulut ja kevyet digitaaliset järjestelmät. Yksi ihminen, suora yhteys rakentajaan.",
       "image": "https://tulkintatila.fi/images/logo.png",
       "areaServed": {"@type": "Country", "name": "Finland"},
       "knowsAbout": ["AI-konsultointi", "digitaaliset työnkulut", "verkkosivut", "kevyet digitaaliset järjestelmät"],
@@ -707,6 +924,7 @@ a   { color: inherit; text-decoration: none; }
     </button>
     <div class="nav-links">
       <a href="#palvelut" class="nav-link">Palvelut</a>
+      <a href="#kenelle" class="nav-link">Kenelle</a>
       <a href="#prosessi" class="nav-link">Prosessi</a>
       <a href="#minusta" class="nav-link">Tulkintatila</a>
       <a href="https://lab.tulkintatila.fi/" class="nav-link" target="_blank" rel="noopener">Lab ↗</a>
@@ -721,14 +939,12 @@ a   { color: inherit; text-decoration: none; }
       <div class="hero-content">
         <p class="hero-eyebrow">AI-konsultointi · Digitaaliset rakenteet · Työnkulut</p>
         <h1 class="hero-h1">
-          Tehdään ajattelu,<br>
-          <em>havainto ja<br>päätöslogiikka</em><br>
-          näkyväksi.
+          Kaikki ongelmat<br>
+          eivät ole <em>teknisiä.</em>
         </h1>
         <p class="hero-body">
-          Tulkintatila auttaa ottamaan AI:n käyttöön tarkoituksenmukaisesti —
-          ei valmiiden mallien mukaan, vaan sen mukaan miten työ
-          todellisuudessa tapahtuu.
+          Usein ongelma on se, ettei kukaan näe rakennetta vielä tarpeeksi selvästi.
+          Tulkintatila tekee rakenteen näkyväksi — ja rakentaa sen päälle toimivan ratkaisun.
         </p>
         <div class="hero-actions">
           <a href="mailto:hello@tulkintatila.fi" class="btn btn--primary">Ota yhteyttä</a>
@@ -736,26 +952,30 @@ a   { color: inherit; text-decoration: none; }
         </div>
       </div>
       <div class="hero-flow">
-        <p class="flow-label-top">Työskentelytapa</p>
+        <p class="flow-label-top">Palvelut alkaen</p>
         <div class="flow-track">
           <div class="flow-step">
             <span class="flow-n">01</span>
-            <span class="flow-name">Havainto</span>
+            <span class="flow-name">Rakenteen tulkinta</span>
+            <span class="flow-sub">290 €</span>
           </div>
           <div class="flow-step">
             <span class="flow-n">02</span>
-            <span class="flow-name">Tulkinta</span>
+            <span class="flow-name">Fyysis-digitaalinen identiteetti</span>
+            <span class="flow-sub">790 €</span>
           </div>
           <div class="flow-step">
             <span class="flow-n">03</span>
-            <span class="flow-name">Rakenne</span>
+            <span class="flow-name">Toimintajärjestelmät</span>
+            <span class="flow-sub">1 490 €</span>
           </div>
           <div class="flow-step">
             <span class="flow-n">04</span>
-            <span class="flow-name">Toteutus</span>
+            <span class="flow-name">Jatkuva tulkintatila</span>
+            <span class="flow-sub">sopimus</span>
           </div>
         </div>
-        <p class="flow-caption">Havainto ja tulkinta eivät jää taustalle —<br>ne tehdään näkyviksi ennen toteutusta.</p>
+        <p class="flow-caption">Yksi ihminen. Suora yhteys rakentajaan.<br>Ei välikäsiä, ei projektipäälliköitä.</p>
       </div>
     </section>
 
@@ -767,40 +987,93 @@ a   { color: inherit; text-decoration: none; }
             <span class="section-n">01</span>
             <span>Palvelut</span>
           </div>
-          <h2 class="section-h2">Käytännön ratkaisuja, kun valmiit mallit eivät riitä</h2>
-          <p class="section-desc">Rakennan ratkaisuja silloin, kun työn logiikka pitää tehdä näkyväksi ennen toteutusta.</p>
+          <h2 class="section-h2">Neljä tapaa tehdä yhteistyötä</h2>
+          <p class="section-desc">Kaikki lähtee rakenteesta. Valitse tarpeen mukaan — kertaluonteisesta selvityksestä pidempiaikaiseen kumppanuuteen.</p>
         </div>
-        <div class="card-grid">
+        <div class="card-grid card-grid--2">
+
           <article class="card card--featured">
-            <div class="card-tag">AI-konsultointi</div>
-            <h3 class="card-h3">AI-avusteiset työnkulut</h3>
-            <p class="card-body">Suunnittelen työnkulkuja, joissa AI:ta käytetään tarkoituksenmukaisesti — havaintojen käsittely, luokittelu, dokumentointi ja päätöslogiikka pysyvät selkeänä rakenteena.</p>
+            <div class="card-tag">Kertaluonteinen · Konsultaatio</div>
+            <h3 class="card-h3">Rakenteen tulkinta</h3>
+            <div class="card-price">290 <span class="price-unit">€ / kerta</span></div>
+            <p class="card-body">Käydään läpi yksi ongelma tai prosessi. Tuloksena: kirjattu rakenne, päätöspisteet ja seuraavat askeleet. Sopii, kun haluat selkeyttä ennen kuin teet mitään.</p>
+            <p class="card-detail">Noin 90 min · Kirjallinen yhteenveto · Etänä tai paikan päällä</p>
           </article>
+
           <article class="card">
-            <div class="card-tag">Verkkosivut</div>
-            <h3 class="card-h3">Verkkosivut</h3>
-            <p class="card-body">Sivuja, joiden tehtävä on kantaa ajattelua, rakennetta ja toimintalogiikkaa — ei vain esitellä.</p>
+            <div class="card-tag">Verkkosivupaketti</div>
+            <h3 class="card-h3">Fyysis-digitaalinen identiteetti</h3>
+            <div class="card-price">790 <span class="price-unit">€</span></div>
+            <p class="card-body">Verkkosivut, jotka kantavat ajattelua — ei vain esittelypinta. Rakenne, sisältö ja tekninen toteutus samassa paketissa. Valmis, kun se on valmis.</p>
+            <p class="card-detail">Sisältää: suunnittelu, koodaus, tekstit yhdessä, julkaisu</p>
           </article>
+
           <article class="card">
-            <div class="card-tag">Järjestelmät</div>
-            <h3 class="card-h3">Kevyet digitaaliset järjestelmät</h3>
-            <p class="card-body">Rajattuja digitaalisia rakenteita tiettyyn käytännön tarpeeseen, kun suuri valmis alusta olisi työn kokoon nähden raskas.</p>
+            <div class="card-tag">Kiinteä projekti</div>
+            <h3 class="card-h3">Toimintajärjestelmät</h3>
+            <div class="card-price">1 490 <span class="price-unit">€</span></div>
+            <p class="card-body">Kevyt digitaalinen rakenne, joka tekee työn logiikan näkyväksi. Ajanvaraus, NFC-rakenteet, AI-työnkulku tai kevyt asiakkuustyökalu — se mikä sopii tarpeeseen.</p>
+            <p class="card-detail">Sisältää: määrittely, toteutus, dokumentointi, käyttöönotto</p>
           </article>
+
           <article class="card">
-            <div class="card-tag">Prosessit</div>
-            <h3 class="card-h3">Ajanvaraus ja palvelupolut</h3>
-            <p class="card-body">Rakenne, jossa varaus, eteneminen ja palvelun vaiheet pysyvät samassa käytännön ketjussa.</p>
+            <div class="card-tag">Pidempiaikainen yhteistyö</div>
+            <h3 class="card-h3">Jatkuva tulkintatila</h3>
+            <div class="card-price">Sopimuksen <span class="price-unit">mukaan</span></div>
+            <p class="card-body">Kuukausipohjainen yhteistyö AI:n, rakenteiden ja työnkulkujen kehittämiseen. Sopii, kun tarvitset kumppanin — ei alihankkijaa.</p>
+            <p class="card-detail">Joustava · Kuukausisopimus · Aloitetaan aina Rakenteen tulkinnalla</p>
           </article>
-          <article class="card">
-            <div class="card-tag">NFC</div>
-            <h3 class="card-h3">NFC-rakenteet</h3>
-            <p class="card-body">Fyysiseen kohteeseen liitetty luettava tieto, joka tuo havaintoa, historiaa tai vastuuta näkyviin suoraan oikeassa kohdassa.</p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- KENELLE -->
+    <section class="section section--alt" id="kenelle">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">02</span>
+            <span>Kenelle</span>
+          </div>
+          <h2 class="section-h2">Kenelle tämä sopii</h2>
+          <p class="section-desc">Ei kaikille — mutta tietyille hyvin. Tulkintatila sopii parhaiten niille, joille työn laatu ja ajattelun selkeys ovat yhtä tärkeitä kuin lopputulos.</p>
+        </div>
+        <div class="audience-grid">
+
+          <article class="audience-card">
+            <p class="audience-tag-label">Asiantuntijayritykset</p>
+            <h3 class="audience-h3">Konsultit, terapeutit, valmentajat</h3>
+            <p class="audience-body">Tarvitset AI:n, joka sopii siihen miten sinä teet työtä — ei yleiseen malliin. Dokumentointi, asiakkuuksien hallinta ja päätöslogiikka tulevat näkyviksi.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">AI-työnkulut</span>
+              <span class="audience-pill">Dokumentointi</span>
+              <span class="audience-pill">Rakenne</span>
+            </div>
           </article>
-          <article class="card card--consult">
-            <div class="card-tag">Konsultointi</div>
-            <h3 class="card-h3">Rakenteellinen analyysi</h3>
-            <p class="card-body">Kun ongelma ei ole tekninen vaan rakenteellinen: erotetaan havainto, tulkinta ja päätelmä — ja katsotaan miten niistä muodostuu toimiva prosessi.</p>
+
+          <article class="audience-card">
+            <p class="audience-tag-label">Hyvinvointiala</p>
+            <h3 class="audience-h3">Ajanvaraus, asiakkuudet, hoitoketjut</h3>
+            <p class="audience-body">Ajanvaraus, asiakkuuksien hallinta ja dokumentointi samassa rakenteessa. Palvelupolku pysyy selkeänä alusta loppuun — myös silloin kun vaihtoehtoja on useita.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">Ajanvaraus</span>
+              <span class="audience-pill">Palvelupolut</span>
+              <span class="audience-pill">NFC</span>
+            </div>
           </article>
+
+          <article class="audience-card">
+            <p class="audience-tag-label">Luovat toimistot</p>
+            <h3 class="audience-h3">Sisältötyönkulut ja asiakasviestintä</h3>
+            <p class="audience-body">Sisältötyönkulut, asiakasviestintä ja prosessit selkeäksi rakenteeksi. AI ei korvaa luovaa työtä — se tekee siitä hallittavampaa ja toistettavampaa.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">Sisältörakenne</span>
+              <span class="audience-pill">Työnkulut</span>
+              <span class="audience-pill">Verkkosivut</span>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -810,7 +1083,7 @@ a   { color: inherit; text-decoration: none; }
       <div class="container">
         <div class="section-intro">
           <div class="section-label section-label--light">
-            <span class="section-n">02</span>
+            <span class="section-n">03</span>
             <span>Prosessi</span>
           </div>
           <h2 class="section-h2 section-h2--light">Miten työ etenee</h2>
@@ -856,12 +1129,70 @@ a   { color: inherit; text-decoration: none; }
       </div>
     </section>
 
-    <!-- MILLOIN -->
-    <section class="section" id="milloin">
+    <!-- FIKSIRIBU REFERENSSI -->
+    <section class="section" id="fiksiribu">
       <div class="container">
         <div class="section-intro">
           <div class="section-label">
-            <span class="section-n">03</span>
+            <span class="section-n">04</span>
+            <span>Referenssi</span>
+          </div>
+          <h2 class="section-h2">Fiksiribu — AI-arkkitehtuuri käytännössä</h2>
+          <p class="section-desc">Esimerkki siitä, miten nelikerroksinen AI-rakenne tekee tekoälystä hallittavan — ei black box -ratkaisun.</p>
+        </div>
+        <div class="case-study-card">
+          <div class="case-study-top">
+            <div>
+              <span class="case-study-badge">Case · AI-arkkitehtuuri</span>
+              <h3 class="case-study-h3">Nelikerroksinen AI, jossa päätöslogiikka pysyy näkyvänä</h3>
+              <p class="case-study-body">Fiksiribu on AI-pohjainen palvelu, jonka arkkitehtuuri rakennettiin neljälle selkeälle kerrokselle. Jokaisella kerroksella on yksi tehtävä — ja vain yksi. Tuloksena on järjestelmä, jota voi lukea, seurata ja kehittää ilman että koko rakenne hajoaa.</p>
+            </div>
+            <div class="case-study-quote">
+              <p>"Et myy tekoälyä. Myyt rauhaa siitä, että tekoäly on hallinnassa."</p>
+            </div>
+          </div>
+          <div class="arch-table">
+            <div class="arch-head">
+              <div class="arch-head-cell">Kerros</div>
+              <div class="arch-head-cell">Nimi</div>
+              <div class="arch-head-cell">Työkalu</div>
+              <div class="arch-head-cell">Tehtävä</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-cell arch-num">1</div>
+              <div class="arch-cell arch-name-col">Tulkintakerros</div>
+              <div class="arch-cell arch-tool-col">Claude</div>
+              <div class="arch-cell arch-desc-col">Tilanteen ymmärtäminen, kysymysten muotoilu — tekoäly toimii tulkkina, ei päättäjänä.</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-cell arch-num">2</div>
+              <div class="arch-cell arch-name-col">Prosessikerros</div>
+              <div class="arch-cell arch-tool-col">Työnkulku</div>
+              <div class="arch-cell arch-desc-col">Työnkulun ohjaus ja päätöspisteet — tässä kerroksessa päätetään, mitä tapahtuu seuraavaksi.</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-cell arch-num">3</div>
+              <div class="arch-cell arch-name-col">Tietokerros</div>
+              <div class="arch-cell arch-tool-col">Konteksti</div>
+              <div class="arch-cell arch-desc-col">Historiatiedot, asiakasdata ja konteksti — AI saa vain sen tiedon, mitä se tarvitsee kulloinkin.</div>
+            </div>
+            <div class="arch-row">
+              <div class="arch-cell arch-num">4</div>
+              <div class="arch-cell arch-name-col">Toimintakerros</div>
+              <div class="arch-cell arch-tool-col">Toteutus</div>
+              <div class="arch-cell arch-desc-col">Konkreettiset toimenpiteet, viestit ja kirjaukset — vasta tässä kerroksessa tapahtuu jotain oikeasti.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MILLOIN -->
+    <section class="section section--alt" id="milloin">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">05</span>
             <span>Milloin</span>
           </div>
           <h2 class="section-h2">Milloin tästä on hyötyä</h2>
@@ -902,16 +1233,16 @@ a   { color: inherit; text-decoration: none; }
         <div class="about-grid">
           <div class="about-text">
             <div class="section-label">
-              <span class="section-n">04</span>
+              <span class="section-n">06</span>
               <span>Tulkintatila</span>
             </div>
-            <h2 class="section-h2">Kohta, jossa havainto ja rakenne kohtaavat</h2>
-            <p class="about-p">Tulkintatila on työskentelytapa, jossa erotetaan toisistaan havainto, tulkinta ja päätelmä — ja katsotaan miten niistä muodostuu käytännön työprosessi.</p>
-            <p class="about-p">Erityisosaaminen: AI-avusteiset työnkulut, rakenteellinen analyysi, digitaaliset ratkaisut käytännön työn tueksi.</p>
+            <h2 class="section-h2">Yksi ihminen. Suora yhteys rakentajaan.</h2>
+            <p class="about-p">Tulkintatila on itsenäinen konsultti — ei toimisto, ei tiimi, ei alihankkijaverkosto. Kun otat yhteyttä, puhut suoraan sen ihmisen kanssa, joka tekee työn.</p>
+            <p class="about-p">Erityisosaaminen: AI-arkkitehtuuri, rakenteellinen analyysi ja digitaaliset ratkaisut, joissa päätöslogiikka pysyy näkyvänä. Asiakkaina asiantuntijayrityksiä, hyvinvointialan toimijoita ja luovia toimistoja.</p>
             <a href="mailto:hello@tulkintatila.fi" class="btn btn--primary btn--sm">hello@tulkintatila.fi</a>
           </div>
           <blockquote class="about-quote">
-            <p>"Havainto, tulkinta ja päätelmä eivät jää taustalle. Ne tehdään näkyviksi, jotta työ voidaan toteuttaa tarkasti."</p>
+            <p>"Havainto, tulkinta ja päätelmä eivät jää taustalle. Ne tehdään näkyviksi, jotta työ voidaan toteuttaa tarkasti — ja jotta AI pysyy hallinnassa."</p>
             <cite>— Tulkintatila</cite>
           </blockquote>
         </div>
@@ -924,8 +1255,8 @@ a   { color: inherit; text-decoration: none; }
         <div class="lab-card">
           <div class="lab-content">
             <span class="lab-eyebrow">Tulkintatila Lab</span>
-            <h2 class="lab-h2">Käytännön esimerkkejä ja kokeiluja</h2>
-            <p class="lab-body">Labissa näkyy käytännön taso: rakennettuja esimerkkejä, tapauksia ja kokeiluja siitä, miten havainto, rakenne ja päätöslogiikka muuttuvat toimiviksi digitaalisiksi ratkaisuiksi.</p>
+            <h2 class="lab-h2">Käytännön esimerkkejä ja dokumentoitua arkkitehtuuria</h2>
+            <p class="lab-body">Labissa näkyy käytännön taso: rakennettuja esimerkkejä, tapauksia ja kokeiluja. Fiksiribu-arkkitehtuuri, ajanvarausjärjestelmät, NFC-rakenteet ja AI-työnkulut — kaikki rakenne ja päätöslogiikka auki.</p>
             <a href="https://lab.tulkintatila.fi/" class="btn btn--lab" target="_blank" rel="noopener">Siirry labiin →</a>
           </div>
           <div class="lab-deco" aria-hidden="true">
@@ -940,7 +1271,7 @@ a   { color: inherit; text-decoration: none; }
       <div class="container">
         <div class="cta-inner">
           <h2 class="cta-h2">Aloitetaan?</h2>
-          <p class="cta-body">Kerro tilanteestasi. Katsotaan yhdessä, missä kohdin havainto, tulkinta ja rakenne pitää tehdä näkyviksi.</p>
+          <p class="cta-body">Kerro tilanteestasi. Katsotaan yhdessä, missä kohdin rakenne pitää tehdä näkyväksi — ja mikä on oikea tapa aloittaa.</p>
           <a href="mailto:hello@tulkintatila.fi" class="btn btn--primary btn--lg">Ota yhteyttä</a>
         </div>
       </div>
@@ -955,11 +1286,12 @@ a   { color: inherit; text-decoration: none; }
       </a>
       <nav class="footer-nav" aria-label="Alatunnisteen navigaatio">
         <a href="#palvelut">Palvelut</a>
+        <a href="#kenelle">Kenelle</a>
         <a href="#prosessi">Prosessi</a>
         <a href="https://lab.tulkintatila.fi/" target="_blank" rel="noopener">Lab</a>
         <a href="mailto:hello@tulkintatila.fi">hello@tulkintatila.fi</a>
       </nav>
-      <p class="footer-copy">© 2025 Tulkintatila</p>
+      <p class="footer-copy">© 2026 Tulkintatila</p>
     </div>
   </footer>
 
