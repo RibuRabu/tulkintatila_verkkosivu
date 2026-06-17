@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitaalinen tuotepassi | Tulkintatila</title>
+  <meta name="description" content="Luo, hallinnoi ja julkaise tuotteidesi digitaaliset passit. DPP-valmis tuotetietojärjestelmä pienille valmistajille, maahantuojille ja tuotebrändeille. QR- ja NFC-valmis.">
+  <link rel="canonical" href="https://tulkintatila.fi/digitaalinen-tuotepassi/">
+  <meta property="og:locale" content="fi_FI">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Digitaalinen tuotepassi | Tulkintatila">
+  <meta property="og:description" content="DPP-valmis tuotetietojärjestelmä pienille valmistajille ja tuotebrändeille. QR- ja NFC-valmis, päivitettävä, koneluettava.">
+  <meta property="og:url" content="https://tulkintatila.fi/digitaalinen-tuotepassi/">
+  <meta property="og:site_name" content="Tulkintatila">
+  <meta property="og:image" content="https://tulkintatila.fi/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Digitaalinen tuotepassi | Tulkintatila">
+  <meta name="twitter:description" content="DPP-valmis tuotetietojärjestelmä. Luo, hallinnoi ja julkaise tuotepassit — QR- ja NFC-valmis.">
+  <meta name="twitter:image" content="https://tulkintatila.fi/images/logo.png">
+  <meta name="author" content="Tulkintatila">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2f4739">
+  <meta name="geo.region" content="FI-18">
+  <meta name="geo.placename" content="Helsinki, Suomi">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+/* ============================================
+   DIGITAALINEN TUOTEPASSI — page extensions
+   ============================================ */
+
+/* PASSPORT FLOW DIAGRAM */
+.passport-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  overflow: hidden;
+}
+.pf-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+.pf-row:last-child { border-bottom: none; }
+.pf-node {
+  flex: 1;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.pf-node:last-child { border-right: none; }
+.pf-node:hover { background: rgba(47,71,57,0.04); }
+.pf-id {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.pf-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mid);
+}
+.pf-arrow {
+  padding: 0 10px;
+  color: var(--border-mid);
+  font-size: 14px;
+  flex-shrink: 0;
+  display: none;
+}
+.pf-caption {
+  padding: 14px 20px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.55;
+  border-top: 1px solid var(--border);
+}
+
+/* CONTAINS GRID */
+.contains-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.contains-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px;
+  background: var(--bg);
+  transition: background 0.18s;
+}
+.contains-item:hover { background: var(--card-bg); }
+.contains-id {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--accent-mid);
+  background: var(--tag-bg);
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+  letter-spacing: 0.03em;
+}
+.contains-label {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* DIFF CARDS */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.diff-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px 30px;
+  transition: border-color 0.22s, box-shadow 0.28s var(--ease);
+}
+.diff-card:hover {
+  border-color: var(--border-mid);
+  box-shadow: 0 8px 28px rgba(30,42,35,0.07);
+}
+.diff-no {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  text-decoration: line-through;
+  text-decoration-color: var(--border-mid);
+}
+.diff-yes {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.diff-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* PILOT BLOCK */
+.pilot-block {
+  background: var(--bg-dark);
+  border-radius: var(--radius-lg);
+  padding: 56px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  position: relative;
+  overflow: hidden;
+}
+.pilot-block::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(74,107,87,0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pilot-left { position: relative; z-index: 1; }
+.pilot-right { position: relative; z-index: 1; }
+.pilot-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--highlight);
+  margin-bottom: 18px;
+}
+.pilot-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.18;
+  margin-bottom: 16px;
+}
+.pilot-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.52);
+  line-height: 1.72;
+  margin-bottom: 28px;
+}
+.pilot-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pilot-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+  transition: background 0.18s;
+}
+.pilot-list li:last-child { border-bottom: none; }
+.pilot-list li:hover { background: rgba(255,255,255,0.03); }
+.pilot-check {
+  color: var(--highlight);
+  flex-shrink: 0;
+  font-size: 13px;
+  margin-top: 1px;
+}
+.pilot-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.6;
+  margin-top: 20px;
+}
+.pilot-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+/* FAQ */
+.faq-list {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 780px;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px;
+  transition: background 0.18s;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-item:hover { background: var(--card-bg); }
+.faq-q {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.faq-a {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.72;
+}
+.faq-a em {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* HERO DPP */
+.hero-dpp {
+  min-height: calc(100vh - var(--nav-h));
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 64px;
+  align-items: center;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 80px 36px 100px;
+  animation: fadeUp 0.7s var(--ease) both;
+}
+
+/* STEPS — light variant for DPP */
+.steps--light {
+  border: 1px solid var(--border);
+}
+.steps--light .step {
+  border-right-color: var(--border);
+  background: var(--bg);
+}
+.steps--light .step:hover { background: var(--card-bg); }
+.steps--light .step-n {
+  color: rgba(47,71,57,0.10);
+}
+.steps--light .step-h3 { color: var(--text); }
+.steps--light .step p { color: var(--text-mid); }
+
+/* CTA DARK SECTION */
+.dpp-cta-section { padding: 120px 0 140px; text-align: center; background: var(--bg-dark); }
+.dpp-cta-inner { max-width: 560px; margin: 0 auto; padding: 0 36px; }
+.dpp-cta-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 20px;
+}
+.dpp-cta-body {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.72;
+  margin-bottom: 36px;
+}
+.dpp-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.dpp-cta-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .hero-dpp { grid-template-columns: 1fr; min-height: auto; padding: 64px 36px 80px; gap: 48px; }
+  .passport-flow .pf-row { flex-direction: column; }
+  .passport-flow .pf-node { border-right: none; border-bottom: 1px solid var(--border); }
+  .passport-flow .pf-node:last-child { border-bottom: none; }
+  .diff-grid { grid-template-columns: repeat(2, 1fr); }
+  .pilot-block { grid-template-columns: 1fr; padding: 44px 40px; gap: 40px; }
+  .contains-grid { grid-template-columns: 1fr; }
+  .steps--light.steps { grid-template-columns: repeat(3, 1fr); }
+  .steps--light .step:nth-child(3) { border-right: none; }
+  .steps--light .step:nth-child(4),
+  .steps--light .step:nth-child(5),
+  .steps--light .step:nth-child(6) { border-top: 1px solid var(--border); }
+}
+
+/* MOBILE */
+@media (max-width: 720px) {
+  .hero-dpp { padding: 48px 20px 64px; gap: 40px; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .pilot-block { padding: 32px 24px; }
+  .faq-item { padding: 22px 20px; }
+  .faq-q { font-size: 15px; }
+  .dpp-cta-section { padding: 80px 0 100px; }
+  .dpp-cta-actions { flex-direction: column; align-items: center; }
+  .steps--light.steps { grid-template-columns: 1fr; }
+  .steps--light .step { border-right: none; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .steps--light .step:last-child { border-bottom: none; }
+  .steps--light .step-n { font-size: 36px; }
+}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://tulkintatila.fi/digitaalinen-tuotepassi/#webpage",
+        "url": "https://tulkintatila.fi/digitaalinen-tuotepassi/",
+        "name": "Digitaalinen tuotepassi | Tulkintatila",
+        "description": "DPP-valmis tuotetietojärjestelmä pienille valmistajille, maahantuojille ja tuotebrändeille. Luo, hallinnoi ja julkaise digitaaliset tuotepassit.",
+        "inLanguage": "fi",
+        "isPartOf": { "@id": "https://tulkintatila.fi/#website" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://tulkintatila.fi/digitaalinen-tuotepassi/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Onko digitaalinen tuotepassi jo pakollinen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ei kaikille tuotteille. EU:n tuotepassivaatimukset etenevät tuotekategoria kerrallaan. Tekstiilit ja akkutuotteet ovat ensimmäisten joukossa. Muiden kategorioiden aikataulut tarkentuvat. Ennakoiva valmistautuminen on järkevää ennen kuin vaatimus koskee omaa liiketoimintaa."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Onko tämä EU:n määräysten mukainen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tämä on DPP-valmis tuotetietojärjestelmä — ei todistus vaatimustenmukaisuudesta. Järjestelmä on rakennettu niin, että se voidaan mukauttaa kategoriakohtaisiin vaatimuksiin niiden tarkentuessa. Tämä ei ole oikeudellinen neuvonta."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Voinko päivittää tuotetietoja jälkikäteen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Kyllä. Se on koko järjestelmän keskeinen ominaisuus. QR-koodi ohjaa aina uusimpaan versioon."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Tarvitseeko minulla olla NFC?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ei. QR-koodi riittää täysin. NFC on lisävaihtoehto tilanteisiin, joissa se sopii paremmin tuotteeseen tai käyttötilanteeseen."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Toimiiko tämä pienille tuoteerille?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Kyllä. Järjestelmä toimii yhdestä tuotteesta ylöspäin. Pilotti on suunniteltu juuri pienten erien ja yksittäisten tuotteiden kanssa työskenteleville yrityksille."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Kuka omistaa datan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sinä. Tuotedata on sinun. Se ei siirry kolmansille osapuolille."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wnurjt6llh");
+  </script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-brand">
+      <img src="../images/logo.png" alt="Tulkintatila — AI-konsultointi ja digitaaliset rakenteet" class="nav-logo">
+    </a>
+    <button class="nav-toggle" aria-label="Valikko" aria-expanded="false"
+      onclick="var e=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',e?'false':'true');document.querySelector('.nav-links').classList.toggle('is-open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="/#palvelut" class="nav-link">Palvelut</a>
+      <a href="/#kenelle" class="nav-link">Kenelle</a>
+      <a href="/#prosessi" class="nav-link">Prosessi</a>
+      <a href="/#minusta" class="nav-link">Tulkintatila</a>
+      <a href="https://lab.tulkintatila.fi/" class="nav-link" target="_blank" rel="noopener">Lab ↗</a>
+      <a href="/digitaalinen-tuotepassi/" class="nav-link" aria-current="page">Tuotepassi</a>
+      <a href="mailto:hello@tulkintatila.fi" class="nav-cta">Ota yhteyttä</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="hero-dpp">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Digitaalinen tuotepassi</p>
+        <h1 class="hero-h1">Digitaalinen tuotepassi tuotteillesi —<br><em>ilman raskasta järjestelmähanketta</em></h1>
+        <p class="hero-body">Luo, hallinnoi ja julkaise tuotteidesi digitaaliset passit. Rakenteinen tuotetieto, joka pysyy ajan tasalla — myös sen jälkeen, kun tuote on jo myyty.</p>
+        <div class="hero-actions">
+          <a href="#pilotti" class="btn btn--primary btn--lg">Kysy pilotista</a>
+          <a href="#miten-toimii" class="btn btn--ghost btn--lg">Lue miten tämä toimii ↓</a>
+        </div>
+      </div>
+
+      <!-- System flow diagram -->
+      <div class="hero-flow">
+        <p class="flow-label-top">Järjestelmä yhdellä silmäyksellä</p>
+        <div class="passport-flow">
+          <div class="pf-row">
+            <div class="pf-node">
+              <span class="pf-id">01 — tuote</span>
+              <span class="pf-label">Fyysinen tuote</span>
+            </div>
+            <div class="pf-node">
+              <span class="pf-id">02 — identiteetti</span>
+              <span class="pf-label">Digitaalinen identiteetti</span>
+            </div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-node">
+              <span class="pf-id">03 — passi</span>
+              <span class="pf-label">Julkinen tuotepassi</span>
+            </div>
+            <div class="pf-node">
+              <span class="pf-id">04 — linkki</span>
+              <span class="pf-label">QR / NFC</span>
+            </div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-node" style="flex: 1;">
+              <span class="pf-id">05 — lukija</span>
+              <span class="pf-label">Asiakas · Partneri · Järjestelmä</span>
+            </div>
+          </div>
+          <div class="pf-caption">Tieto päivittyy yhdestä paikasta. QR-koodi pysyy samana.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONGELMA -->
+    <section class="section section--alt" id="ongelma">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">01</span>
+            <span>Ongelma</span>
+          </div>
+          <h2 class="section-h2">Tuotetieto on hajallaan.<br>QR-koodi yksin ei riitä.</h2>
+          <p class="section-desc">Pienet yritykset kärsivät samasta ongelmasta: tieto on monessa paikassa eikä päivity automaattisesti. EU:n vaatimukset liikkuvat kohti rakenteista, päivitettävää digitaalista tuotetietoa.</p>
+        </div>
+        <div class="when-grid">
+          <div class="when-item">
+            <span class="when-marker">●</span>
+            <p><strong>Tieto ei ole yhdessä paikassa.</strong> Verkkosivulla yksi versio, pakkauksessa toinen, toimittajalla kolmas. Mikään ei päivity automaattisesti.</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker">●</span>
+            <p><strong>Staattinen QR-koodi on umpikuja.</strong> Jos QR ohjaa PDF:ään tai tulostettuun sivuun, tieto vanhenee heti kun jokin muuttuu.</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker">●</span>
+            <p><strong>EU:n vaatimukset liikkuvat.</strong> Digitaalinen tuotepassi on tulossa tuotekategoria kerrallaan. Tekstiilit ja akut ovat ensimmäisinä. Muiden aikataulu tarkentuu.</p>
+          </div>
+          <div class="when-item">
+            <span class="when-marker">●</span>
+            <p><strong>Pienillä yrityksillä ei ole megaprojektiin varaa.</strong> Tarvitaan käytännöllinen tapa aloittaa ennen kuin vaatimukset koskettavat omaa liiketoimintaa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MITÄ JÄRJESTELMÄ TEKEE -->
+    <section class="section" id="toiminnot">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">02</span>
+            <span>Toiminnot</span>
+          </div>
+          <h2 class="section-h2">Yksi paikka tuotteen koko digitaaliselle identiteetille.</h2>
+          <p class="section-desc">Tuotepassi ei ole tuotesivu eikä PDF. Se on päivitettävä, julkinen ja koneluettava tietopiste, joka on sidottu fyysiseen tuotteeseen.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <p class="card-tag">01</p>
+            <h3 class="card-h3">Luo tuotepassi</h3>
+            <p class="card-body">Täytä tuotteen tiedot rakenteiseen lomakkeeseen. Järjestelmä pitää rakenteen yhtenäisenä — sinä huolehdit sisällöstä.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag">02</p>
+            <h3 class="card-h3">Julkaise julkinen sivu</h3>
+            <p class="card-body">Jokainen tuote saa oman URL-osoitteen ja julkisen tuotepassisivun. Asiakas, jälleenmyyjä tai tarkastaja pääsee tietoihin suoraan selaimella.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag">03</p>
+            <h3 class="card-h3">Generoi QR tai NFC</h3>
+            <p class="card-body">Tulosta QR-koodi tai ohjelmoi NFC-tag. Linkki ohjaa aina ajantasaiseen passiin. Koodi ei muutu, vaikka sisältö päivittyisi.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag">04</p>
+            <h3 class="card-h3">Päivitä jälkikäteen</h3>
+            <p class="card-body">Muuta materiaalitietoja, lisää huomioita, korjaa virheitä. Tieto päivittyy heti — tuotteessa kiinni oleva koodi ei tarvitse vaihtoa.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag">05</p>
+            <h3 class="card-h3">Koneluettava data</h3>
+            <p class="card-body">Tuotedata on saatavilla rakenteisessa muodossa. Ei pelkkänä HTML-sivuna — myös muoto, jonka järjestelmät voivat käsitellä automaattisesti.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag">06</p>
+            <h3 class="card-h3">Hallinnoi dashboardista</h3>
+            <p class="card-body">Näe kaikki tuotteesi, niiden statukset ja viimeisimmät päivitykset yhdessä näkymässä. Ei tiedostoja, ei taulukoita.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MITEN TOIMII -->
+    <section class="section section--ink" id="miten-toimii">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label section-label--light">
+            <span class="section-n">03</span>
+            <span>Prosessi</span>
+          </div>
+          <h2 class="section-h2 section-h2--light">Kuusi vaihetta tuotteesta julkiseksi passiksi.</h2>
+          <p class="section-desc section-desc--light">Pilotti vie päiviä, ei kuukausia. Ensimmäinen passi syntyy jo kartoituskeskustelun jälkeen.</p>
+        </div>
+        <div class="steps" style="grid-template-columns: repeat(6,1fr);">
+          <div class="step">
+            <span class="step-n">01</span>
+            <h3 class="step-h3">Luo tuote</h3>
+            <p>Lisää tuote dashboardiin. Anna sille tunniste ja nimi.</p>
+          </div>
+          <div class="step">
+            <span class="step-n">02</span>
+            <h3 class="step-h3">Täytä data</h3>
+            <p>Syötä materiaalit, ohjeet, tunnisteet ja muut tiedot lomakkeelle.</p>
+          </div>
+          <div class="step">
+            <span class="step-n">03</span>
+            <h3 class="step-h3">Julkaise passi</h3>
+            <p>Tuote saa julkisen URL-osoitteen ja koneluettavan datapäätteen.</p>
+          </div>
+          <div class="step">
+            <span class="step-n">04</span>
+            <h3 class="step-h3">Kiinnitä QR/NFC</h3>
+            <p>Tulosta koodi tai ohjelmoi tagi. Kiinnitä tuotteeseen tai pakkaukseen.</p>
+          </div>
+          <div class="step">
+            <span class="step-n">05</span>
+            <h3 class="step-h3">Skannataan</h3>
+            <p>Asiakas tai partneri skannaa ja saa ajantasaisen tuotetiedon.</p>
+          </div>
+          <div class="step">
+            <span class="step-n">06</span>
+            <h3 class="step-h3">Päivitä</h3>
+            <p>Korjaa tietoja tai lisää versioita. Passi päivittyy ilman uutta koodia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MITÄ PASSI VOI SISÄLTÄÄ -->
+    <section class="section section--alt" id="sisalto">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">04</span>
+            <span>Sisältö</span>
+          </div>
+          <h2 class="section-h2">Yksi rakenne, useita kenttiä.</h2>
+          <p class="section-desc">Passin sisältö mukautuu tuotteesi tarpeisiin. Pakollisuus ja kenttien laajuus vaihtelevat tuotekategorian ja oman tarpeen mukaan.</p>
+        </div>
+        <div class="contains-grid">
+          <div class="contains-item">
+            <span class="contains-id">product.name</span>
+            <span class="contains-label">Tuotenimi ja malli</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">manufacturer</span>
+            <span class="contains-label">Valmistaja tai maahantuoja</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">origin.country</span>
+            <span class="contains-label">Alkuperämaa</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">materials</span>
+            <span class="contains-label">Materiaalit ja komponentit</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">care.instructions</span>
+            <span class="contains-label">Hoito-ohjeet</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">repair.info</span>
+            <span class="contains-label">Korjausohjeet ja huoltopisteet</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">recycling</span>
+            <span class="contains-label">Kierrätysohjeet</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">safety.notes</span>
+            <span class="contains-label">Turvallisuustiedot ja varoitukset</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">identifiers</span>
+            <span class="contains-label">EAN, GTIN, tuotetunnukset</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">certifications</span>
+            <span class="contains-label">Sertifikaatit ja liitteet</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">version.history</span>
+            <span class="contains-label">Versiohistoria ja muutosloki</span>
+          </div>
+          <div class="contains-item">
+            <span class="contains-id">custom.fields</span>
+            <span class="contains-label">Vapaat kentät tuotekategorian mukaan</span>
+          </div>
+        </div>
+        <p style="margin-top:20px; font-size:12px; color:var(--text-muted); font-weight:300;">Kentät vaihtelevat tuotekategorian ja tarpeen mukaan. Sinä päätät, mitä julkaiset.</p>
+      </div>
+    </section>
+
+    <!-- KENELLE -->
+    <section class="section" id="kenelle">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">05</span>
+            <span>Kenelle</span>
+          </div>
+          <h2 class="section-h2">Kaikille, joilla on tuote markkinoilla.</h2>
+          <p class="section-desc">Tuotepassi sopii pieniin yrityksiin, jotka haluavat rakenteistaa tuotetietonsa — oli kyseessä sitten yksi tuote tai kokonainen valikoima.</p>
+        </div>
+        <div class="audience-grid" style="grid-template-columns: repeat(3,1fr);">
+          <article class="audience-card">
+            <p class="audience-tag-label">Valmistajat</p>
+            <h3 class="audience-h3">Pienet valmistajat</h3>
+            <p class="audience-body">Tuotteesi ansaitsee digitaalisen identiteetin riippumatta valmistusmäärästä.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">valmistus</span>
+              <span class="audience-pill">tuotetieto</span>
+              <span class="audience-pill">DPP-valmius</span>
+            </div>
+          </article>
+          <article class="audience-card">
+            <p class="audience-tag-label">Tuonti</p>
+            <h3 class="audience-h3">Maahantuojat</h3>
+            <p class="audience-body">Hallinnoi toimittajien tuotetietoja yhdessä paikassa. Pidä data ajan tasalla.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">maahantuonti</span>
+              <span class="audience-pill">toimittajatieto</span>
+              <span class="audience-pill">päivitettävyys</span>
+            </div>
+          </article>
+          <article class="audience-card">
+            <p class="audience-tag-label">Luovat alat</p>
+            <h3 class="audience-h3">Design- ja käsityöbrändit</h3>
+            <p class="audience-body">Kerro materiaalit, valmistusprosessi ja tuotteen tarina selkeässä rakenteessa.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">design</span>
+              <span class="audience-pill">käsityö</span>
+              <span class="audience-pill">läpinäkyvyys</span>
+            </div>
+          </article>
+          <article class="audience-card">
+            <p class="audience-tag-label">Tuotebrändit</p>
+            <h3 class="audience-h3">Hyvinvointi- ja tuotebrändit</h3>
+            <p class="audience-body">Jäsennä ainesosat, hoito-ohjeet ja turvatiedot kuntoon ennen kuin se on pakollista.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">wellness</span>
+              <span class="audience-pill">ainesosat</span>
+              <span class="audience-pill">EU-valmius</span>
+            </div>
+          </article>
+          <article class="audience-card">
+            <p class="audience-tag-label">Verkkokauppa</p>
+            <h3 class="audience-h3">Pienet verkkokaupat</h3>
+            <p class="audience-body">Valmistaudu EU:n tuleviin vaatimuksiin ennakoivasti — ennen kuin kilpailija tekee sen ensin.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">ecommerce</span>
+              <span class="audience-pill">EU-valmius</span>
+              <span class="audience-pill">ennakointi</span>
+            </div>
+          </article>
+          <article class="audience-card">
+            <p class="audience-tag-label">Kaikki muut</p>
+            <h3 class="audience-h3">Ennakoivat yritykset</h3>
+            <p class="audience-body">Paras aika aloittaa on ennen kuin se on pakollista. Pilotti vie päiviä, ei kuukausia.</p>
+            <div class="audience-tags">
+              <span class="audience-pill">DPP-valmius</span>
+              <span class="audience-pill">kevyt aloitus</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIKÄ EROTTAA -->
+    <section class="section section--alt" id="ero">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">06</span>
+            <span>Ero</span>
+          </div>
+          <h2 class="section-h2">Tämä ei ole QR-generaattori.<br>Eikä se ole verkkokaupan tuotesivu.</h2>
+          <p class="section-desc">Digitaalinen tuotepassi on erillinen kerros — olemassa riippumatta kanavasta, päivitettävä jälkikäteen, luettavissa koneellisesti.</p>
+        </div>
+        <div class="diff-grid">
+          <div class="diff-card">
+            <p class="diff-no">Staattinen PDF</p>
+            <h3 class="diff-yes">Päivittyy reaaliajassa</h3>
+            <p class="diff-body">Tieto on ajan tasalla heti kun muutat sitä dashboardista. QR-koodi ei vanhennu.</p>
+          </div>
+          <div class="diff-card">
+            <p class="diff-no">Pelkkä QR-generaattori</p>
+            <h3 class="diff-yes">Päätepiste, jolla on sisältö</h3>
+            <p class="diff-body">QR on sisäänkäynti. Tärkeintä on se, mitä siellä lukee — ja että se pysyy ajan tasalla.</p>
+          </div>
+          <div class="diff-card">
+            <p class="diff-no">Verkkosivun tuotesivu</p>
+            <h3 class="diff-yes">Kanavaneutraali identiteetti</h3>
+            <p class="diff-body">Tuotepassi on olemassa riippumatta siitä, missä tai kenelle tuotetta myydään.</p>
+          </div>
+          <div class="diff-card">
+            <p class="diff-no">Massajärjestelmä</p>
+            <h3 class="diff-yes">Suunniteltu pienille yrityksille</h3>
+            <p class="diff-body">Ei vaadi ERP:iä, integraatioprojektia tai IT-osastoa. Aloitetaan yhdestä tuotteesta.</p>
+          </div>
+          <div class="diff-card">
+            <p class="diff-no">EU-vaatimustenmukaisuuslupaus</p>
+            <h3 class="diff-yes">DPP-valmis rakenne</h3>
+            <p class="diff-body">Järjestelmä on rakennettu mukautumaan kategoriakohtaisiin vaatimuksiin niiden tarkentuessa. Ei oikeudellista neuvontaa.</p>
+          </div>
+          <div class="diff-card">
+            <p class="diff-no">Vain HTML-näkymä</p>
+            <h3 class="diff-yes">Koneluettava data</h3>
+            <p class="diff-body">Tuotedata on saatavilla rakenteisessa muodossa — muodossa, jonka ulkoiset järjestelmät voivat lukea automaattisesti.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILOTTI -->
+    <section class="section" id="pilotti">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">07</span>
+            <span>Pilotti</span>
+          </div>
+          <h2 class="section-h2">Ensimmäiset tuotepassit käyttöön — ilman megaprojektia.</h2>
+        </div>
+        <div class="pilot-block">
+          <div class="pilot-left">
+            <span class="pilot-eyebrow">Pilottipaketti</span>
+            <h3 class="pilot-h3">Aloitetaan pienesti.<br>Rakennetaan oikein.</h3>
+            <p class="pilot-body">Ei vuosisopimusta. Ei integraatioprojektia. Ei tyhjää lupausta EU-vaatimustenmukaisuudesta — vaan toimiva järjestelmä, jota voi laajentaa tarpeen kasvaessa.</p>
+            <p class="pilot-note">Pilottihinta ja aikataulu sovitaan yhdessä kartoituksen jälkeen.</p>
+            <div class="pilot-actions">
+              <a href="mailto:hello@tulkintatila.fi?subject=Digitaalinen tuotepassi — pilotti" class="btn btn--primary">Kysy pilotista</a>
+              <a href="mailto:hello@tulkintatila.fi?subject=Digitaalinen tuotepassi — kartoitus" class="btn btn--lab">Varaa kartoitus</a>
+            </div>
+          </div>
+          <div class="pilot-right">
+            <ul class="pilot-list">
+              <li><span class="pilot-check">✓</span>Pilottiasennus ja konfigurointi</li>
+              <li><span class="pilot-check">✓</span>Ensimmäiset 5–10 tuotepassia</li>
+              <li><span class="pilot-check">✓</span>QR- ja NFC-valmiit linkit jokaiselle tuotteelle</li>
+              <li><span class="pilot-check">✓</span>Perusdashboard hallinnointiin</li>
+              <li><span class="pilot-check">✓</span>Tuotetietojen rakenteen määrittely yhdessä</li>
+              <li><span class="pilot-check">✓</span>Valinnainen toteutusapu — ensimmäinen julkaisu yhdessä</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UKK -->
+    <section class="section section--alt" id="ukk">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-label">
+            <span class="section-n">08</span>
+            <span>Kysymyksiä</span>
+          </div>
+          <h2 class="section-h2">Usein kysyttyä.</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <p class="faq-q">Onko digitaalinen tuotepassi jo pakollinen?</p>
+            <p class="faq-a">Ei kaikille tuotteille. EU:n tuotepassivaatimukset etenevät tuotekategoria kerrallaan. Tekstiilit ja akkutuotteet ovat ensimmäisten joukossa; muiden kategorioiden aikataulut tarkentuvat. Ennakoiva valmistautuminen on järkevää ennen kuin vaatimus koskee sinun tuotteitasi.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Onko tämä EU:n määräysten mukainen?</p>
+            <p class="faq-a">Tämä on DPP-valmis tuotetietojärjestelmä — ei todistus vaatimustenmukaisuudesta. Järjestelmä on rakennettu niin, että se voidaan mukauttaa kategoriakohtaisiin vaatimuksiin niiden tarkentuessa. <em>Tämä ei ole oikeudellinen neuvonta.</em></p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Voinko päivittää tuotetietoja jälkikäteen?</p>
+            <p class="faq-a">Kyllä. Se on koko järjestelmän keskeinen ominaisuus. Muutat tietoja dashboardista — QR-koodi ohjaa aina uusimpaan versioon ilman uudelleentulostusta.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Tarvitsenko NFC-tagin?</p>
+            <p class="faq-a">Ei. QR-koodi riittää täysin. NFC on lisävaihtoehto tilanteisiin, joissa se sopii paremmin tuotteeseen tai käyttötilanteeseen — esimerkiksi kun tuote on pieni tai sen pinta ei sovi koodille.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Toimiiko tämä pienille tuoteerille?</p>
+            <p class="faq-a">Kyllä. Järjestelmä toimii yhdestä tuotteesta ylöspäin. Pilotti on suunniteltu juuri pienten erien ja yksittäisten tuotteiden kanssa työskenteleville yrityksille.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Kuka omistaa datan?</p>
+            <p class="faq-a">Sinä. Tuotedata on sinun. Se ei siirry kolmansille osapuolille.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q">Sopiiko tämä, jos myyn monessa kanavassa?</p>
+            <p class="faq-a">Kyllä. Tuotepassi on kanavaneutraali — se ei ole sidottu verkkokaupassisi tai myyntipisteeseen. Sama linkki toimii kaikkialla riippumatta siitä, mistä tuote on ostettu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="dpp-cta-section" id="yhteys">
+      <div class="dpp-cta-inner">
+        <h2 class="dpp-cta-h2">Selvitetään, miten tämä toimisi sinun tuotteillesi.</h2>
+        <p class="dpp-cta-body">Ei sitoutumista, ei myyntipuhetta. Kartoitetaan yhdessä, mitä tuotteesi tarvitsevat — ja onko pilotti järkevä seuraava askel.</p>
+        <div class="dpp-cta-actions">
+          <a href="mailto:hello@tulkintatila.fi?subject=Digitaalinen tuotepassi — pilotti" class="btn btn--primary btn--lg">Kysy pilotista</a>
+          <a href="mailto:hello@tulkintatila.fi?subject=Digitaalinen tuotepassi — kartoitus" class="btn btn--lab btn--lg">Varaa kartoitus</a>
+        </div>
+        <p class="dpp-cta-note">Ei myyntitilausta. Ei automaattisesti alkavaa sopimusta.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="/" class="footer-brand">
+        <img src="../images/logo.png" alt="Tulkintatila-logo" class="footer-logo">
+      </a>
+      <nav class="footer-nav" aria-label="Alatunnisteen navigaatio">
+        <a href="/#palvelut">Palvelut</a>
+        <a href="/#kenelle">Kenelle</a>
+        <a href="/#prosessi">Prosessi</a>
+        <a href="/digitaalinen-tuotepassi/">Tuotepassi</a>
+        <a href="https://lab.tulkintatila.fi/" target="_blank" rel="noopener">Lab</a>
+        <a href="mailto:hello@tulkintatila.fi">hello@tulkintatila.fi</a>
+      </nav>
+      <p class="footer-copy">© 2026 Tulkintatila</p>
+    </div>
+  </footer>
+
+</body>
+</html>
